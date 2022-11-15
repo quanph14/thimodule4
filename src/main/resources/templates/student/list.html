@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Student</title>
+</head>
+<body>
+
+    <div>
+        <a><h1>List Student</h1> </a>
+
+        <form class="d-flex" action="@{/student/create}" method="post">
+            <input type="text" placeholder="Search" name="searchName">
+            <input type="hidden" name="action" value="searchByName">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <a href="/student/showFormCreate" >Create new Student</a>
+    </div>
+</nav>
+<table border="1" class="table" style="text-align: center">
+    <tr>
+        <th>Student name</th>
+        <th>Date of birth</th>
+        <th>Address</th>
+        <th>Phone number</th>
+        <th>Email</th>
+        <th>Class room</th>
+        <th colspan="2">feature</th>
+    </tr>
+    <th:block th:each="student : ${students}">
+        <tr>
+            <td th:href="@{/student/delete/__${student.id}__}" th:text="${student.name}"></td>
+            <td th:text="${student.doB}"></td>
+            <td th:text="${student.address}"></td>
+            <td th:text="${student.phoneNumber}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.classRoom}"></td>
+            <td><a th:href="@{/student/edit/__${student.id}__}" class="btn btn-info">Edit</a></td>
+            <td><a th:href="@{/student/delete/__${student.id}__}" class="btn btn-danger">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

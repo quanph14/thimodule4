@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Student</title>
+</head>
+<body>
+<h1>Create student</h1>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/student/create}" th:object="${student}" method="post">
+    <table>
+        <tr>
+            <td>Student name:</td>
+            <td><input type="text" placeholder="Student name" th:field="*{name}" style="width: 200px"/></td>
+            <p th:if="${#fields.hasErrors('studentName')}" th:errors="*{name}"></p>
+            <p th:text="${message}"></p>
+        </tr>
+        <tr>
+            <td>Date of birth :</td>
+            <td><input type="text" placeholder="yyyy-MM-DD" th:field="*{doB}" style="text-align: left; width: 200px"/></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td><input type="text" placeholder="Address" th:field="*{address}" style="width: 200px"/></td>
+        </tr>
+
+        <tr>
+            <td>Phone Number:</td>
+            <td><input type="String" placeholder="phone number" th:field="*{phoneNumber}" style="width: 200px"/></td>
+            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" th:field="*{email}" style="width: 200px"/></td>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+        </tr>
+        <td>Class room</td>
+        <td>
+            <select th:field="*{classRoom}"  style="width: 200px">
+                <option value="">Class</option>
+                <option th:each="c : ${classrooms}" th:value="${c.id}" th:text="${c.className}"></option>
+            </select>
+        </td>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create student" class="btn btn-info">
+                <a class="btn btn-info" href="/student/list">Back List</a></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

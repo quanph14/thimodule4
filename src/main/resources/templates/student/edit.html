@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student</title>
+</head>
+<bod>
+<h1>Edit Student </h1>
+
+<form th:action="@{/student/edit}" th:object="${student}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Student name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <p th:if="${#fields.hasErrors('studentName')}" th:errors="*{name}"></p>
+            <p th:text="${message}"></p>
+        </tr>
+        <tr>
+            <td>Date of Birt:</td>
+            <td><input type="text" th:field="*{doB}"/></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td><input type="text" th:field="*{address}"/></td>
+        </tr>
+
+        <tr>
+            <td>Phone number:</td>
+            <td><input type="text" th:field="*{phoneNumber}"/></td>
+            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
+            <p th:text="${message}"></p>
+        </tr>
+
+        <tr>
+            <td>Phone number:</td>
+            <td><input type="text" th:field="*{email}"/></td>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            <p th:text="${message}"></p>
+        </tr>
+
+        <tr>
+            <td>Class room:</td>
+            <td>
+                <select name="class room">
+                    <option th:each="c : ${classrooms}"
+                            th:value="${c.id}"
+                            th:text="${c.className}"
+                            th:selected="(${student.classroom}) and (${c.id} == *{classRoom.id})"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+    </table>
+</form>
+
+</bod>
+</html>
