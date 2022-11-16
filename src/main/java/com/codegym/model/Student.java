@@ -1,6 +1,5 @@
 package com.codegym.model;
 
-import com.codegym.model.Classroom;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,19 +11,18 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "student")
+@Table(name = "students")
 @Getter
 @Setter
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String studentName;
     private LocalDate doB;
     private String address;
     private String phoneNumber;
     private String email;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "classroom_id")
+    @ManyToOne
     private Classroom classRoom;
 }

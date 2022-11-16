@@ -30,7 +30,7 @@ public class StudentService implements IStudentService{
         studentRepository.deleteById(id);
     }
 //    @Override
-//    public Iterable<Student> findAllByStudentName(String name) {
-//        return studentRepository.findAllByStudentName(name);
+//    public Iterable<Student> findAllByStudent(String name) {
+//        return studentRepository.findAllByStudent(name);
 //    }
 }

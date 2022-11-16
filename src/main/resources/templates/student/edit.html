@@ -2,59 +2,61 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Student</title>
+    <title>Sửa thông tin học viên</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-<bod>
-<h1>Edit Student </h1>
-
+<body style="margin: auto ; text-align: center">
+<h1>Sửa thông tin học viên </h1>
 <form th:action="@{/student/edit}" th:object="${student}" method="post">
-    <input th:type="hidden" name="id" th:field="*{id}">
-    <table>
+    <table style="margin-right: auto; margin-left: auto; text-align: left">
         <tr>
-            <td>Student name:</td>
-            <td><input type="text" th:field="*{name}"/></td>
-            <p th:if="${#fields.hasErrors('studentName')}" th:errors="*{name}"></p>
+            <td>Tên học viên</td>
+            <td><input type="text" th:field="*{studentName}"/></td>
+            <p th:if="${#fields.hasErrors('studentName')}" th:errors="*{studentName}"></p>
             <p th:text="${message}"></p>
         </tr>
         <tr>
-            <td>Date of Birt:</td>
-            <td><input type="text" th:field="*{doB}"/></td>
+            <td>Ngày sinh</td>
+            <td><input type="date" th:field="*{doB}"/></td>
         </tr>
         <tr>
-            <td>Address:</td>
+            <td>Địa chỉ</td>
             <td><input type="text" th:field="*{address}"/></td>
         </tr>
 
         <tr>
-            <td>Phone number:</td>
+            <td>Số điện thoại</td>
             <td><input type="text" th:field="*{phoneNumber}"/></td>
             <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
             <p th:text="${message}"></p>
         </tr>
 
         <tr>
-            <td>Phone number:</td>
+            <td>Email</td>
             <td><input type="text" th:field="*{email}"/></td>
             <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
             <p th:text="${message}"></p>
         </tr>
 
         <tr>
-            <td>Class room:</td>
+            <td>Lớp học</td>
             <td>
-                <select name="class room">
-                    <option th:each="c : ${classrooms}"
-                            th:value="${c.id}"
-                            th:text="${c.className}"
-                            th:selected="(${student.classroom}) and (${c.id} == *{classRoom.id})"></option>
+                <select name="class room" th:field="*{classRoom}">
+                    <option th:each="class : ${classrooms}"
+                            th:value="${class.id}"
+                            th:text="${class.className}"
+                            th:selected="(${student.classRoom}) and (${class.id} == *{classRoom.id})"></option>
                 </select>
             </td>
         </tr>
         <tr>
             <td></td>
+            <td><input type="submit" value="Cập nhật học viên" class="btn btn-light">
+                <a class="btn btn-light" href="/student/list">Quay lại</a></td>
         </tr>
     </table>
 </form>
 
-</bod>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
 </html>

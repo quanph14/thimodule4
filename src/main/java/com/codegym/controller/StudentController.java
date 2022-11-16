@@ -21,17 +21,20 @@ public class StudentController {
     private IClassroomService classroomService;
 
     @ModelAttribute("classrooms")
-    public Iterable<Classroom> categories(){
+    public Iterable<Classroom> classRooms(){
         return classroomService.findAll();
     }
 
     @GetMapping("/list")
-    public ModelAndView listStudent() {
+    public ModelAndView listStudent(@RequestParam("search") Optional<String> search) {
+        Iterable<Student> students;
+
+            students = studentService.findAll();
         ModelAndView modelAndView = new ModelAndView("/student/list");
-        modelAndView.addObject("students",studentService.findAll());
+        modelAndView.addObject("students",students);
         return modelAndView;
     }
-    @GetMapping("/showFormCreate")
+    @GetMapping("/create")
     public ModelAndView showFormCreate() {
         ModelAndView modelAndView = new ModelAndView("/student/create");
         modelAndView.addObject("student", new Student());
@@ -49,7 +52,7 @@ public class StudentController {
     public ModelAndView showEditForm(@PathVariable Long id) {
         Optional<Student> student = studentService.findById(id);
         if (student.isPresent()) {
-            ModelAndView modelAndView = new ModelAndView("/student/edit");
+            ModelAndView modelAndView = new ModelAndView("student/edit");
             modelAndView.addObject("student", student.get());
             return modelAndView;
         } else {
@@ -77,14 +80,15 @@ public class StudentController {
         }
     }
     @PostMapping("/delete")
-    public String deleteStudent(@ModelAttribute("city") Student student) {
+    public String deleteStudent(@ModelAttribute("student") Student student) {
         studentService.remove(student.getId());
         return "redirect:Student";
     }
 
+
 //    @PostMapping("/search/{name}")
 //    public ModelAndView showEditForm(@PathVariable String name) {
-//        Iterable<Student> students = studentService.findAllByStudentName(name);
+//        Iterable<Student> students = studentService.findAllByStudent(name);
 //        if (students != null ) {
 //            ModelAndView modelAndView = new ModelAndView("/student/list");
 //            modelAndView.addObject("students",students);

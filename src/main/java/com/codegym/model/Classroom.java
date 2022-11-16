@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +17,6 @@ public class Classroom {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String className;
 
 }
